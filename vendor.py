@@ -4,7 +4,7 @@ import pyshark
 import requests
 import time
 try:
-    # Please paste this in the terminal: testfiles/pingedpackets.pcapng
+    # Please paste this in the terminal: files/pingedpackets.pcapng
     filename = input("Enter path of file to read: ").strip()
     cap = pyshark.FileCapture(filename, display_filter='arp')
     i = 0
@@ -17,17 +17,17 @@ try:
             sourceMac = packet['arp'].src_hw_mac
             destMac = packet['arp'].dst_hw_mac
 
-            print("Device 1\n")
+            print("\nDevice 1")
             response1 = requests.get(url+sourceMac)
-            time.sleep(3)
+            time.sleep(1)
             print("src mac: ", sourceMac)
             print(response1.content.decode())
 
-            print("Device 2\n")
+            print("\nDevice 2")
             print("dest mac: ", destMac)
             response2 = requests.get(url+destMac)
-            time.sleep(3)
-            print(response2.content.decode())
+            time.sleep(1)
+            print(response1.content.decode())
 
         except Exception as err:
             pass

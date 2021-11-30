@@ -4,8 +4,13 @@ import pyshark
 from user_agents import parse
 from tkinter import *
 from tkinter import filedialog
+import tkinter.font as tkFont
+
 root = Tk()
-# Please paste this in the terminal: files/wireshark_output.pcapng
+fontStyle = tkFont.Font(family="Lucida Grande", size=15)
+# Please paste this in the terminal: files/pc.pcapng
+
+root.geometry("1500x500")
 
 
 def isMobileDevice(useragent):
@@ -34,7 +39,8 @@ def isPC(useragent):
 
 def getUserAgent():
     root.filename = filedialog.askopenfilename(
-        initialdir="/", title="Select file", filetypes=(("pcapng files", "*.pcapng"), ("all files", "*.*")))
+        initialdir="/", title="Select file")
+
     if root.filename == '':
         print("No file selected")
         sys.exit()
@@ -49,24 +55,28 @@ def getUserAgent():
         for useragent in useragents:
             i = i+1
             if isMobileDevice(useragent):
-                myLabel = Label(root, text="Mobile Device")
+                myLabel = Label(root, text="Mobile Device", font=fontStyle)
                 myLabel.pack()
             elif isTabletDevice(useragent):
-                myLabel = Label(root, text="Tablet Device")
+                myLabel = Label(root, text="Tablet Device", font=fontStyle)
                 myLabel.pack()
             elif isPC(useragent):
-                myLabel = Label(root, text="PC Device")
+                myLabel = Label(root, text="PC Device", font=fontStyle)
                 myLabel.pack()
             else:
-                myLabel = Label(root, text="Unknown Device")
+                myLabel = Label(root, text="Unknown Device", font=fontStyle)
                 myLabel.pack()
+
             myLabel = Label(root, text="Packet"+str(i) +
-                            ": " + useragent)
+                            ":  " + useragent, font=fontStyle)
+            print("\n")
             myLabel.pack()
+
         cap.close()
 
 
-fileInputBtn = Button(root, text="Choose file to scrape", command=getUserAgent)
+fileInputBtn = Button(root, text="Choose file to scrape", font=fontStyle,
+                      command=getUserAgent)
 
 fileInputBtn.pack()
 
