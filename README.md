@@ -37,4 +37,4 @@ Contains PC http related data
 - Able to fetch source and destination MAC address from pcap file using arp protocol and displaying Vendor Name.
 
 Contains packets which are from devices in the same network
-`/files/pingedpackets.pcapng`
+`/files/vendor.pcapng`

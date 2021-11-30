@@ -1,16 +1,17 @@
 import os
 import sys
+# Used to capture packets from pcap
 import pyshark
+# Getting device type from useragent
 from user_agents import parse
+# GUI
 from tkinter import *
 from tkinter import filedialog
 import tkinter.font as tkFont
 
 root = Tk()
 fontStyle = tkFont.Font(family="Lucida Grande", size=15)
-# Please paste this in the terminal: files/pc.pcapng
-
-root.geometry("1500x500")
+root.geometry("1500x600")
 
 
 def isMobileDevice(useragent):
@@ -55,21 +56,25 @@ def getUserAgent():
         for useragent in useragents:
             i = i+1
             if isMobileDevice(useragent):
-                myLabel = Label(root, text="Mobile Device", font=fontStyle)
+                myLabel = Label(
+                    root, text="Device Type : Mobile", font=fontStyle)
                 myLabel.pack()
             elif isTabletDevice(useragent):
-                myLabel = Label(root, text="Tablet Device", font=fontStyle)
+                myLabel = Label(
+                    root, text="Device Type : Tablet", font=fontStyle)
                 myLabel.pack()
             elif isPC(useragent):
-                myLabel = Label(root, text="PC Device", font=fontStyle)
+                myLabel = Label(
+                    root, text="Device Type : PC", font=fontStyle)
                 myLabel.pack()
             else:
-                myLabel = Label(root, text="Unknown Device", font=fontStyle)
+                myLabel = Label(
+                    root, text="Device Type : Unknown", font=fontStyle)
                 myLabel.pack()
 
             myLabel = Label(root, text="Packet"+str(i) +
-                            ":  " + useragent, font=fontStyle)
-            print("\n")
+                            ":  " + useragent+"\n", font=fontStyle)
+
             myLabel.pack()
 
         cap.close()

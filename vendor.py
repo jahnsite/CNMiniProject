@@ -27,7 +27,7 @@ try:
             print("dest mac: ", destMac)
             response2 = requests.get(url+destMac)
             time.sleep(1)
-            print(response1.content.decode())
+            print(response2.content.decode())
 
         except Exception as err:
             pass
